@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.utils.html import mark_safe
+from django_ckeditor_5.fields import CKEditor5Field
 from shortuuid.django_fields import ShortUUIDField
 import shortuuid
 
@@ -39,7 +40,7 @@ PAYMENT_STATUS=(
 class Hotel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    description= models.TextField(null=True, blank=True)
+    description= CKEditor5Field(null=True, blank=True,config_name='extends')
     image= models.FileField(upload_to='hotel_gallery')
     address= models.CharField(max_length=200)
     mobile= models.CharField(max_length=200)
