@@ -152,6 +152,66 @@ class Room(models.Model):
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     payment_status = models.CharField(max_length=100, choices=PAYMENT_STATUS)
+    
+    full_name = models.CharField(max_length=1000)
+    email = models.EmailField(max_length=1000)
+    phone = models.CharField(max_length=1000)
+
+    hotel= models.ForeignKey(Hotel, on_delete=models.SET_NULL, null=True, blank=True)
+    room_type= models.ForeignKey(RoomType,on_delete=models.SET_NULL, null=True, blank=True)
+    room= models.ManyToManyField(Room)
+    before_discount = models.DecimalField(max_digits=12, decimal_places=2,default=0.00)
+    total = models.DecimalField(max_digits=12, decimal_places=2,default=0.00)
+    saved = models.DecimalField(max_digits=12, decimal_places=2,default=0.00)
+
+    check_in_date = models.DateField()
+    check_out_date = models.DateField()
+
+    total_days = models.PositiveIntegerField(default=0)
+    num_adults = models.PositiveIntegerField(default=1)
+    num_children = models.PositiveIntegerField(default=0)
+
+    checked_in= models.BooleanField(default=False)
+    checked_out = models.BooleanField(default=False)
+
+    is_active= models.BooleanField(default=False)
+
+    check_in_tracker = models.BooleanField(default=False)
+    check_out_tracker = models.BooleanField(default=False)
+
+    bid = ShortUUIDField(unique=True, length=10, max_length=20, alphabet='abcdefghijklmnopqrstuvwxyz123456' )
+    date = models.DateTimeField(auto_now_add=True)
+    stripe_payment_intent = models.CharField(max_length=1000, null=True, blank=True)
+    success_id = models.CharField(max_length=1000, null=True, blank=True)
+    booking_id = ShortUUIDField(unique=True, length=10, max_length=20, alphabet='abcdefghijklmnopqrstuvwxyz123456' )
+
+    def __str__(self):
+        return f"{self.booking_id}"
+
+    def rooms(self):
+        return self.room.all().count()
+
+class ActivityLog(models.Model):
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    guest_out = models.DateTimeField()
+    guest_in= models.DateTimeField()
+    description = models.TextField(null=True, blank=True)
+    date= models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.booking}"
+
+
+class StaffOnDuty(models.Model):
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    staff_id = models.CharField(max_length=100, null=True, blank=True)
+    date= models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.staff_id}"
+
+class Coupon(models.Model):
+    pass
 
 
 
