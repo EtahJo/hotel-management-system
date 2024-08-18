@@ -1,0 +1,16 @@
+asgiref==3.8.1
+certifi==2024.7.4
+charset-normalizer==3.3.2
+Django==5.1
+django-anymail==11.1
+django-ckeditor-5==0.2.13
+django-crispy-forms==2.3
+django-mathfilters==1.0.0
+django-taggit==6.0.0
+idna==3.7
+import-export==0.3.1
+pillow==10.4.0
+requests==2.32.3
+shortuuid==1.0.13
+sqlparse==0.5.1
+urllib3==2.2.2

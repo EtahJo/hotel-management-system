@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Django App {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
+    <base href="{% static '/' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li> <a href="{% url 'hotel:index'%}">Home<a></li>
+            <li class="dropdown"> <a href="{% url 'hotel:index'%}" >Hotel<a>
+                <ul class='dropdown-content'>
+                    <li><a>Abu Dash</a></li>
+                    <li><a>Abu Dash</a></li>
+                    <li><a>Abu Dash</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'hotel:index'%}">Dashboard<a></li>
+            <li> <a href="{% url 'hotel:index'%}">Blog<a></li>
+        </ul>
+        <div>
+        {% if request.user.is_authenticated %}
+        <button class='nav-button'>
+            <a href="{% url 'userauth:sign-out' %}">
+            ↦Sign out
+            </a>
+        </button>
+        <button class='nav-button'>➕Add Listing</button>
+        {% else %}
+        <button class='nav-button'>
+              <a href="{% url 'userauth:sign-in' %}">
+                ↦Sign In
+            </a>
+        </button>
+        <button class='nav-button'>
+              <a href="{% url 'userauth:sign-up' %}">
+                ↦Sign Up
+            </a>
+        </button>
+       {% endif %}
+        </div>
+
+    </nav>
+    <main>{% block content%} {% endblock %}</main>
+    <script>
+        {% for message in messages%}
+            swal({
+                icon:"{{message.tags}}",
+                title:"{{message}}",
+                text:"{{message.tags}}",
+                timer:1500
+            })
+        {% endfor %}
+    </script>
+</body>
+</html>
