@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{{hotel.name}}- {{room_type.type}}
+{% endblock  %}
+{% block content %}
+<div class='container'>
+<h1>{{hotel.name}}-{{room_type.type}}</h1>
+<p>All Rooms available: 
+    <strong>{{rooms.count}}</strong>
+</p>
+<div class='row'>
+    <div class=>
+{% for room in rooms%}
+<div class='col-md-4 col-sm-6 col-xs-12 plan'>
+<div class="card">
+    <div class='card-header bg-primary'>
+       <p> <strong>ROOM NO:</strong> {{room.room_number}}</p>
+
+    </div>
+    <div class='card-body'>
+        <p><strong>Number of beds :</strong> {{room.number_of_beds}}</p>
+        <p>{{room.price}}</p>
+    </div>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+
+</div>
+{% endblock %}

@@ -4,16 +4,26 @@
 HomePage
 {% endblock  %}
 {% block content %}
-
-{% if request.user.is_authenticated %}
-
 <div>
-    <h1>  
-        Welcome back {{request.user.username}}
-    </h1>
+{% for hotel in hotels%}
+    <div class='card'>
+        <a href="{% url 'hotel:hotel_detail' hotel.slug %}">
+        <div class ='card-header'>
+            <h3>{{hotel.name}}</h3>
+            {% if hotel.feautured %}
+            <p>Feautured</p>
+            {% endif %}
+        </div>
+        <div class='card-body'>
+            <img src="{{hotel.image.url}}" width="100px" height="100px"/>
+            
+            <p>{{hotel.address}}</p>
+            <p>{{hotel.phone}}</p>
+
+        </div>
+        </a>
+    <div>
+{% endfor %}
 </div>
-{% else %}
-<h1>Welcome back</h1>
-{% endif %}
 
 {% endblock  %}

@@ -47,8 +47,9 @@ INSTALLED_APPS = [
     # 'import-export',
     # 'django-crispy-forms',
     # 'django-mathfilters',
-    # 'django-taggit',
-    'django_ckeditor_5'
+    'taggit',
+    'django_ckeditor_5',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [

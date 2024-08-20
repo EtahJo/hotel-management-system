@@ -3,7 +3,14 @@ from hotel.models import Hotel,HotelFaqs,HotelGallery,HotelFeatures,RoomType,Roo
 
 # Register your models here.
 
+class HotelGalleryInline(admin.TabularInline):
+    model = HotelGallery
+
+class HotelFeauturesInline(admin.TabularInline):
+    model= HotelFeatures
+
 class HotelAdmin (admin.ModelAdmin):
+    inlines = [HotelGalleryInline,HotelFeauturesInline]
     list_display=['thumbnail','name','user','status']
     prepopulated_fields= {"slug":("name",)}
 
