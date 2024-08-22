@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'userauth',
     'addon',
     'user_dashboard',
-
+    'booking',
     # 'import-export',
     # 'django-crispy-forms',
     # 'django-mathfilters',
